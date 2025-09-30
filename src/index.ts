@@ -1,4 +1,20 @@
 #!/usr/bin/env node
 
+interface Note {
+  content: string;
+  id: number;
+}
 
-console.log("Hello Typescript!")
+const note = process.argv[2];
+
+if (!note) {
+  console.error("Uso: cli <mensagem-da-nota>");
+  process.exit(1);
+}
+
+const newNote: Note = {
+  content: note,
+  id: Date.now(),
+};
+
+console.log(newNote);
