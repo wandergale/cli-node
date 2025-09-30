@@ -21,8 +21,7 @@
 
 // console.log(newNote);
 
-#!/usr/bin/env node
-import { Calculator, Operation } from "./calculator";
+import { Calculator, type Operation } from "./calculator.ts";
 
 function usage(): string {
   return [
@@ -54,32 +53,43 @@ const toNumbers = (args: string[]): number[] => {
 };
 
 try {
-  const nums = toNumbers(numArgs);
+  const nums = toNumbers(numArgs); // number[]
   let result: number;
 
   switch (op) {
     case "add":
+      if (nums.length < 1) throw new Error("add needs at least 1 number");
       result = Calculator.add(...nums);
       break;
-    case "sub":
-      result = Calculator.sub(nums[0], ...nums.slice(1));
+
+    case "sub": {
+      if (nums.length < 2) throw new Error("sub needs at least 2 numbers");
+      const [first, ...rest] = nums; // first: number after the guard
+      result = Calculator.sub(first, ...rest);
       break;
+    }
+
     case "mul":
+      if (nums.length < 1) throw new Error("mul needs at least 1 number");
       result = Calculator.mul(...nums);
       break;
-    case "div":
-      result = Calculator.div(nums[0], ...nums.slice(1));
+
+    case "div": {
+      if (nums.length < 2) throw new Error("div needs at least 2 numbers");
+      const [first, ...rest] = nums;
+      result = Calculator.div(first, ...rest);
       break;
+    }
+
     case "pow":
       if (nums.length !== 2) throw new Error("pow needs exactly 2 numbers");
-      result = Calculator.pow(nums[0], nums[1]);
+      result = Calculator.pow(nums[0]!, nums[1]!); // safe after guard
       break;
+
     case "sqrt":
       if (nums.length !== 1) throw new Error("sqrt needs exactly 1 number");
-      result = Calculator.sqrt(nums[0]);
+      result = Calculator.sqrt(nums[0]!); // safe after guard
       break;
-    default:
-      throw new Error(`Unknown operation: ${op}\n\n${usage()}`);
   }
 
   console.log(result);
