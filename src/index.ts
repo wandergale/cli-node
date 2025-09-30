@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { count } from './utils.ts'
+
 interface Note {
   content: string;
   id: number;
