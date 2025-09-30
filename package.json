@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "note": "src/index.ts"
+    "note": "dist/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "note": "npm run build && node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "homepage": "https://github.com/wandergale/cli-node#readme",
   "devDependencies": {
     "@types/node": "^24.6.0",
+    "cross-env": "^10.1.0",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"
