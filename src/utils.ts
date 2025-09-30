@@ -1,0 +1,1 @@
+export const count = (num: number): number => num;
