@@ -8,7 +8,7 @@ interface Note {
 const note = process.argv[2];
 
 if (!note) {
-  console.error("Uso: cli <message>");
+  console.error("cli <message>");
   process.exit(1);
 }
 
